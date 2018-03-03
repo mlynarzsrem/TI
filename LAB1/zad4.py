@@ -10,8 +10,6 @@ chars = ''.join(sorted(chars))
 print("Chars founded: {"+chars+"}\n")
 dict1={}
 for w in chars:
-	#positions = [pos for pos, char in enumerate(wiki) if char == w]
-	#dict1[w] = [wiki[pos + 1] for pos in positions if (pos +1)<len(wiki) ]
 	dict1[w] = [wiki[pos + 1] for pos, char in enumerate(wiki) if char == w and (pos +1)<len(wiki)]
 print("Creating started!\n")
 finalText="Probability"
