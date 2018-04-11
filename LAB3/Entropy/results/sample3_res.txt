@@ -1,0 +1,14 @@
+Entropia s³ów wynosi: 9.061119324692852
+Entropia znaków wynosi: 3.930297834157987
+
+Entropia warunkowa wyrazów rzêdu 1 wynosi: 5.950214658062274
+Entropia warunkowa wyrazów rzêdu 2 wynosi: 2.630807418221706
+Entropia warunkowa wyrazów rzêdu 3 wynosi: 1.2640914239268135
+Entropia warunkowa wyrazów rzêdu 4 wynosi: 0.41432739497177973
+Entropia warunkowa wyrazów rzêdu 5 wynosi: 0.2001232778310399
+
+Entropia warunkowa znaków rzêdu 1 wynosi: 3.1844662510639306
+Entropia warunkowa znaków rzêdu 2 wynosi: 2.6278951354582425
+Entropia warunkowa znaków rzêdu 3 wynosi: 2.0239901619216036
+Entropia warunkowa znaków rzêdu 4 wynosi: 1.5342420380424457
+Entropia warunkowa znaków rzêdu 5 wynosi: 1.2504121960908972

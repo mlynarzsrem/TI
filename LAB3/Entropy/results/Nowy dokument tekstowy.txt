@@ -1,0 +1,6 @@
+sample 0 wyglada dobrze
+sample1 - Tak
+sample2 - podejrzane raczej nie
+sample3 podejrzan
+sample4 - duza entropia s³ow
+samle5 -dziwne
