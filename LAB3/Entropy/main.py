@@ -138,7 +138,7 @@ for filename in os.listdir("files/tocheck"):
     ec = EntropyCalculator(path+"/"+filename)
     entropies.append(ec)
 
-text="filename;EZ;ES;ES1;ES2;ES3;ES4;ES5;EZ1;EZ2;EZ3;EZ4;EZ5;\n"
+text="filename;EZ;ES;EWS1;EWS2;EWS3;EWS4;EWS5;EWZ1;EWZ2;EWZ3;EWZ4;EWZ5;\n"
 for ent in entropies:
     text+=str(ent.filename)+";"+str(ent.charsEntropy)+";"+str(ent.wordsEntropy)+";"
     text+=str(ent.wordsCondEntropies[0])+";"+str(ent.wordsCondEntropies[1])+";"+str(ent.wordsCondEntropies[2])+";"+str(ent.wordsCondEntropies[3])+";"+str(ent.wordsCondEntropies[4])+";"
