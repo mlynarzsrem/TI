@@ -1,45 +1,58 @@
 from collections import Counter
 import pickle
+from bitarray import bitarray
+import filecmp
+import numpy as np
 class MySimpleEncoder:
-    def init2(self,filename=None):
-        self.text=None
-        self.encoding =None
-        if(filename!=None):
-            with open(filename,"r") as f:
-                self.text=f.read()
-                self.letters = Counter(self.text)
-                self.encoding = None
-
+    def convertTo8Bits(self,byte):
+        binary_rep = "{0:b}".format(byte)
+        while (len(binary_rep) < 8):
+            binary_rep = '0' + binary_rep
+        return binary_rep
+#return self.encoding[c]
     def encode(self,text):
         letters = Counter(text)
         encoding = self.preapreEncodning(letters)
-        score=pickle._dumps(encoding)+encoding['break']
-        for c in text:
-            score+=encoding[c]
-        return score
+        encodingBytes=pickle._dumps(encoding)+bitarray('111111').tobytes()
+        encoded = ''.join(list(map(lambda x:encoding[x],text)))
+        encoded = bitarray(encoded).tobytes()
+        return encodingBytes+encoded
     def decode(self,bytes):
-        breakPoint = str.encode('111111')
+        breakPoint =  bitarray('111111').tobytes()
         index =bytes.find(breakPoint)
         encoding = pickle.loads(bytes[0:index])
-        toDeocde = bytes[index:]
-        pass
+        encoding = {v: k for k, v in encoding.items()}
+        bytes= bytes[index+1:len(bytes)]
+        bits=''.join(list(map(self.convertTo8Bits,bytes)))
+        bits =bits[0:-2]
+        byteList = [bits[x:x+6] for x in range(0, len(bits),6)]
+        decoded = ''.join(list(map(lambda x: encoding[x], byteList)))
+        return decoded
     def load(self,filename):
-        pass
+        with open(filename, "rb") as f:
+            bytes =f.read()
+            decoded = self.decode(bytes)
+            with open("decoded.txt","w") as w:
+                w.write(decoded)
     def save(self,filename):
-        pass
+        with open(filename,'r') as f:
+            text = f.read()
+            encoded =self.encode(text)
+            with open("encode.dat","wb") as w:
+                w.write(encoded)
     def preapreEncodning(self,letters):
         encoding = {}
         count =0
-        encoding['break']=str.encode('111111')
         for l in letters.keys():
             binary_rep ="{0:b}".format(count)
             while(len(binary_rep)<6):
                 binary_rep='0'+binary_rep
-            encoding[l] = str.encode(binary_rep)
+            encoding[l] =binary_rep
             count+=1
         return encoding
 
-with open("norm_wiki_sample.txt","r") as f:
-    text = f.read()
+file ="norm_wiki_sample.txt"
 mse = MySimpleEncoder()
-print(mse.encode("ala ma kota"))
+mse.save(file)
+mse.load('encode.dat')
+print(filecmp.cmp(file, 'decoded.txt'))
