@@ -24,7 +24,8 @@ class MySimpleEncoder:
         encoding = {v: k for k, v in encoding.items()}
         bytes= bytes[index+1:len(bytes)]
         bits=''.join(list(map(self.convertTo8Bits,bytes)))
-        bits =bits[0:-2]
+        cut = (len(bits) %6)*-1
+        bits =bits[0:cut]
         byteList = [bits[x:x+6] for x in range(0, len(bits),6)]
         decoded = ''.join(list(map(lambda x: encoding[x], byteList)))
         return decoded
